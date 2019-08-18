@@ -57,7 +57,7 @@ s122=which(AHe$Sample_No==samples[12]&AHe$Grain_morphology==gm[2])
 s123=which(AHe$Sample_No==samples[12]&AHe$Grain_morphology==gm[3])
 
 #Adding colors and also need to add error bars
-colours=rainbow(12, alpha = 0.7)#
+colours=rainbow(length(samples), alpha = 0.7)#
 
 ###########
 #AHe vs eU#
@@ -79,12 +79,9 @@ points(AHe$eU_ppm[s11], AHe$Uncorrected_Age_Ma[s11], pch=16, col=colours[1])
 points(AHe$eU_ppm[s12], AHe$Uncorrected_Age_Ma[s12], pch=15, col=colours[1])
 points(AHe$eU_ppm[s13], AHe$Uncorrected_Age_Ma[s13], pch=18, col=colours[1])
 
-
-
 arrows(AHe$eU_ppm[AHe$Sample_No==samples[1]], AHe$Uncorrected_Age_Ma[AHe$Sample_No==samples[1]]-AHe$Uncorrected_Age_Ma_1s[AHe$Sample_No==samples[1]], AHe$eU_ppm[AHe$Sample_No==samples[1]], AHe$Uncorrected_Age_Ma[AHe$Sample_No==samples[1]]+AHe$Uncorrected_Age_Ma_1s[AHe$Sample_No==samples[1]],length=0.02, angle=90, code=3, col=colours[1])
 arrows(AHe$eU_ppm[AHe$Sample_No==samples[2]], AHe$Uncorrected_Age_Ma[AHe$Sample_No==samples[2]]-AHe$Uncorrected_Age_Ma_1s[AHe$Sample_No==samples[2]], AHe$eU_ppm[AHe$Sample_No==samples[2]], AHe$Uncorrected_Age_Ma[AHe$Sample_No==samples[2]]+AHe$Uncorrected_Age_Ma_1s[AHe$Sample_No==samples[2]],length=0.02, angle=90, code=3, col=colours[2])
 arrows(AHe$eU_ppm[AHe$Sample_No==samples[12]], AHe$Uncorrected_Age_Ma[AHe$Sample_No==samples[12]]-AHe$Uncorrected_Age_Ma_1s[AHe$Sample_No==samples[12]], AHe$eU_ppm[AHe$Sample_No==samples[12]], AHe$Uncorrected_Age_Ma[AHe$Sample_No==samples[12]]+AHe$Uncorrected_Age_Ma_1s[AHe$Sample_No==samples[12]],length=0.02, angle=90, code=3, col=colours[12])
-
 
 points(AHe$eU_ppm[s21], AHe$Uncorrected_Age_Ma[s21], pch=16, col=colours[2])
 points(AHe$eU_ppm[s22], AHe$Uncorrected_Age_Ma[s22], pch=15, col=colours[2])
@@ -152,12 +149,9 @@ points(AHe$Rs_um[s11], AHe$Uncorrected_Age_Ma[s11], pch=16, col=colours[1])
 points(AHe$Rs_um[s12], AHe$Uncorrected_Age_Ma[s12], pch=15, col=colours[1])
 points(AHe$Rs_um[s13], AHe$Uncorrected_Age_Ma[s13], pch=18, col=colours[1])
 
-
-
 arrows(AHe$Rs_um[AHe$Sample_No==samples[1]], AHe$Uncorrected_Age_Ma[AHe$Sample_No==samples[1]]-AHe$Uncorrected_Age_Ma_1s[AHe$Sample_No==samples[1]], AHe$Rs_um[AHe$Sample_No==samples[1]], AHe$Uncorrected_Age_Ma[AHe$Sample_No==samples[1]]+AHe$Uncorrected_Age_Ma_1s[AHe$Sample_No==samples[1]],length=0.02, angle=90, code=3, col=colours[1])
 arrows(AHe$Rs_um[AHe$Sample_No==samples[2]], AHe$Uncorrected_Age_Ma[AHe$Sample_No==samples[2]]-AHe$Uncorrected_Age_Ma_1s[AHe$Sample_No==samples[2]], AHe$Rs_um[AHe$Sample_No==samples[2]], AHe$Uncorrected_Age_Ma[AHe$Sample_No==samples[2]]+AHe$Uncorrected_Age_Ma_1s[AHe$Sample_No==samples[2]],length=0.02, angle=90, code=3, col=colours[2])
 arrows(AHe$Rs_um[AHe$Sample_No==samples[12]], AHe$Uncorrected_Age_Ma[AHe$Sample_No==samples[12]]-AHe$Uncorrected_Age_Ma_1s[AHe$Sample_No==samples[12]], AHe$Rs_um[AHe$Sample_No==samples[12]], AHe$Uncorrected_Age_Ma[AHe$Sample_No==samples[12]]+AHe$Uncorrected_Age_Ma_1s[AHe$Sample_No==samples[12]],length=0.02, angle=90, code=3, col=colours[12])
-
 
 points(AHe$Rs_um[s21], AHe$Uncorrected_Age_Ma[s21], pch=16, col=colours[2])
 points(AHe$Rs_um[s22], AHe$Uncorrected_Age_Ma[s22], pch=15, col=colours[2])
@@ -206,140 +200,4 @@ points(AHe$Rs_um[s123], AHe$Uncorrected_Age_Ma[s123], pch=18, col=colours[12])
 symbols=c(16, 15,18)
 legend("top",legend=c("0T", "1T", "2T"), pch=symbols )
 legend("topright",legend=samples, pch=16 , col=colours )
-dev.off()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# I created a loop to extract the indices for a given grain morphology and sample but I couln't store it properly because the
-#number was never consistent e.g. in some samples all the grains are T0. So I had to do it manually
-# out <- vector("list", 3)
-# for (i in seq (1:3)){
-#   out[i]=which(AHe$Sample_No==samples[1]&AHe$Grain_morphology==gm[i])
-# }
-# out
-# str(out)
-# str(unlist(out))
-
-#####
-#Created a name sequence with the hope that I could use it in the loop below so that I could create a loop for the plot but it didn't work!!
-a=as.character(rep('s',12*3));a
-b=sort(rep(seq(1,12),3));b
-c=rep(seq(1,3),12);c
-for (i in 1:(12*3)){
-  c[i]=paste0(a[i],b[i], c[i])
-};c
-
-#There are two problems, one that the sYX is pasted as a straing "s11" and the other one that I'm subsetting the subset
-#AHe$eU_ppm["s11"]
-# for (i in 1:3){#  s11  s12  s13
-#   points(AHe$eU_ppm[c1[i]], AHe$Uncorrected_Age_Ma[c[i]], pch=16+i, bg=colours[1])
-# }
-# for (i in 4:6){# s21  s22  s23
-#   points(AHe$eU_ppm[c1[i]], AHe$Uncorrected_Age_Ma[c[i]], pch=16+i, bg=colours[2])
-# }
-
-
-
-
-
-
-
-
-
-
-
-####color pallette#####
-YlOrBr <- c("#FFFFD4", "#FED98E", "#FE9929", "#D95F0E", "#993404", alpha=.1)
-
-#jet.colors <-colorRampPalette(c("#00007F", "blue", "#007FFF", "cyan","#7FFF7F", "yellow", "#FF7F00", "red", "#7F0000"))
-
-colfunc_cT3ii<- colorRampPalette(YlOrBr, interpolate="spline")
-colores_cT3ii=c(colfunc_cT3ii(length(samples)))
-
-####################
-plot(AHe$eU_ppm[AHe$Grain_morphology==gm[1]], AHe$Uncorrected_Age_Ma[AHe$Grain_morphology==gm[1]], type="n", xlim=xlim, ylim=ylim, xlab="eU (ppm)", ylab="AHe age (Ma)", mgp=c(.8, 0.1, 0), tck=tma)
-for (s in 1:length(samples)){
-  points(AHe$eU_ppm[AHe$Sample_No==samples[s]], AHe$Uncorrected_Age_Ma[AHe$Sample_No==samples[s]], pch=16, bg=colores_cT3ii[s])
-}
-####
-
-plot(AHe$eU_ppm[AHe$Grain_morphology==gm[1]], AHe$Uncorrected_Age_Ma[AHe$Grain_morphology==gm[1]], type="n", xlim=xlim, ylim=ylim, xlab="eU (ppm)", ylab="AHe age (Ma)", mgp=c(.8, 0.1, 0), tck=tma)
-for (s in 1:length(samples)){
-  points(AHe$eU_ppm[AHe$Sample_No==samples[s]], AHe$Uncorrected_Age_Ma[AHe$Sample_No==samples[s]], pch=16, bg=colours[s])
-}
-
-
-
-
-#pdf("/Users/smoron/Documents/1.Projects/Thermochron/Thermochron_figs/AHevseU_uncorrected_colorcoded_0819.pdf", width=15/2.54, height=6/2.54)
-par(mfrow=c(1, 2))
-par(mar=c(2,2,0,0))
-plot(AHe$eU_ppm[AHe$Grain_morphology==gm[1]], AHe$Uncorrected_Age_Ma[AHe$Grain_morphology==gm[1]], type="n", xlim=xlim, ylim=ylim, xlab="eU (ppm)", ylab="AHe age (Ma)", mgp=c(.8, 0.1, 0), tck=tma)
-
-for (i in 1:length(gm)){
-  arrows(AHe$eU_ppm[AHe$Grain_morphology==gm[i]], AHe$Uncorrected_Age_Ma[AHe$Grain_morphology==gm[i]]-AHe$Uncorrected_Age_Ma_1s[AHe$Grain_morphology==gm[i]], AHe$eU_ppm[AHe$Grain_morphology==gm[i]], AHe$Uncorrected_Age_Ma[AHe$Grain_morphology==gm[i]]+AHe$Uncorrected_Age_Ma_1s[AHe$Grain_morphology==gm[i]],length=0.02, angle=90, code=3)
-  #points(AHe$eU_ppm[AHe$Grain_morphology==gm[i]], AHe$Uncorrected_Age_Ma[AHe$Grain_morphology==gm[i]], pch=20+i, bg="white")
-  points(AHe$eU_ppm[AHe$Grain_morphology==gm[i]], AHe$Uncorrected_Age_Ma[AHe$Grain_morphology==gm[i]], pch=20+i, bg=samples[s])
-
-}
-
-colours=seq(1:length(samples))
-
-for (i in 1:length(gm)){
-  for (s in 1:length(samples)){
-  arrows(AHe$eU_ppm[AHe$Grain_morphology==gm[i]], AHe$Uncorrected_Age_Ma[AHe$Grain_morphology==gm[i]]-AHe$Uncorrected_Age_Ma_1s[AHe$Grain_morphology==gm[i]], AHe$eU_ppm[AHe$Grain_morphology==gm[i]], AHe$Uncorrected_Age_Ma[AHe$Grain_morphology==gm[i]]+AHe$Uncorrected_Age_Ma_1s[AHe$Grain_morphology==gm[i]],length=0.02, angle=90, code=3)
-  #points(AHe$eU_ppm[AHe$Grain_morphology==gm[i]], AHe$Uncorrected_Age_Ma[AHe$Grain_morphology==gm[i]], pch=20+i, bg="white")
-  points(AHe$eU_ppm[AHe$Grain_morphology==gm[i]], AHe$Uncorrected_Age_Ma[AHe$Grain_morphology==gm[i]], pch=20+i, bg=colours[s])
-  }
-}
-
-
-# Let's try again
-plot(AHe$eU_ppm[AHe$Grain_morphology==gm[1]], AHe$Uncorrected_Age_Ma[AHe$Grain_morphology==gm[1]], type="n", xlim=xlim, ylim=ylim, xlab="eU (ppm)", ylab="AHe age (Ma)", mgp=c(.8, 0.1, 0), tck=tma)
-for (s in 1:length(samples)){
-  points(AHe$eU_ppm[AHe$Sample_No==samples[s]], AHe$Uncorrected_Age_Ma[AHe$Sample_No==samples[s]], pch=16, bg=colores_cT3ii[s])
-}
-
-points(AHe$eU_ppm[AHe$Sample_No==samples[1]], AHe$Uncorrected_Age_Ma[AHe$Sample_No==samples[1]], pch=20, bg=colours[1])
-points(AHe$eU_ppm[AHe$Sample_No==samples[1]], AHe$Uncorrected_Age_Ma[AHe$Sample_No==samples[1]], pch=20, bg=colours[2])
-points(AHe$eU_ppm[AHe$Sample_No==samples[1]], AHe$Uncorrected_Age_Ma[AHe$Sample_No==samples[1]], pch=16, bg='red')
-
-
-
-plot(AHe$eU_ppm[AHe$Grain_morphology==gm[1]], AHe$Uncorrected_Age_Ma[AHe$Grain_morphology==gm[1]], pch=20, bg=colours[s])
-plot(AHe$eU_ppm[AHe$Sample_No==samples[1]], AHe$Uncorrected_Age_Ma[AHe$Sample_No==samples[1]], pch=20, bg=colours[s])
-
-
-
-
-if (AHe$Uncorrected_Age_Ma[AHe$Grain_morphology==gm[1]]&){
-  points(AHe$eU_ppm[AHe$Grain_morphology==gm[i]], AHe$Uncorrected_Age_Ma[AHe$Grain_morphology==gm[i]], pch=20+i, bg=colours[s])
-}
-
-
-
-symbols=seq(21, 23,1)
-legend("topright",legend=c("0T", "1T", "2T"), pch=symbols )
-
-par(mar=c(2,1,0,0))
-plot(AHe$Rs_um[AHe$Grain_morphology==gm[1]], AHe$Uncorrected_Age_Ma[AHe$Grain_morphology==gm[1]], type="n", ylim=ylim, xlab="Rs (um)", ylab="", yaxt="n", mgp=c(.8, 0.1, 0), tck=tma)
-axis(2, seq(0,1e3,200), labels=F,tck=tma,mgp=c(.8, 0.1, 0), cex.lab=0.6)
-for (i in 1:length(gm)){
-  arrows(AHe$Rs_um[AHe$Grain_morphology==gm[i]], AHe$Uncorrected_Age_Ma[AHe$Grain_morphology==gm[i]]-AHe$Uncorrected_Age_Ma_1s[AHe$Grain_morphology==gm[i]], AHe$Rs_um[AHe$Grain_morphology==gm[i]], AHe$Uncorrected_Age_Ma[AHe$Grain_morphology==gm[i]]+AHe$Uncorrected_Age_Ma_1s[AHe$Grain_morphology==gm[i]],length=0.02, angle=90, code=3)
-  points(AHe$Rs_um[AHe$Grain_morphology==gm[i]], AHe$Uncorrected_Age_Ma[AHe$Grain_morphology==gm[i]], pch=20+i, bg="white")
-}
-symbols=seq(21, 23,1)
-legend("topright",legend=c("0T", "1T", "2T"), pch=symbols )
-
 dev.off()
